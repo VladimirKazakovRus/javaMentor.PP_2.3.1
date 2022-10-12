@@ -1,17 +1,30 @@
 package org.example.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+
+    @Column(name = "name")
+    private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
     private String email;
+
     private String password;
 
-    public User(){}
+    public User() {}
 
-    public User(String name, String LastName, String Email,String Password){
-        this.name = name;
-        this.lastName = LastName;
+    public User(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
@@ -24,12 +37,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -58,7 +71,7 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("User [id = %d; name = %s; lastName = %s; email = %s; password = %s]",
-        id, name, lastName, email, password);
+        return String.format("User [id = %d; firstName = %s; lastName = %s; email = %s; password = %s]",
+                id, firstName, lastName, email, password);
     }
 }

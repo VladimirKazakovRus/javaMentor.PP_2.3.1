@@ -1,27 +1,49 @@
 package org.example.service;
 
+import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.stereotype.Service;
+import org.example.dao.UserDAO;
 import org.example.model.User;
 
 import java.util.List;
 
-public class UserServiceImpl implements UserService{
+@Service
+
+public class UserServiceImpl implements UserService {
+
+    private final UserDAO userDAO;
+
+    public UserServiceImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
+    @Override
     public List<User> readAllUsers() {
-        return null;
+        return userDAO.readAllUsers();
     }
 
+    @Override
     public User createUser(User user) {
-        return null;
+        return userDAO.createUser(user);
     }
 
+    @Override
     public User deleteUser(Integer userId) {
+        try {
+            return userDAO.deleteUser(userId);
+        } catch (InvalidDataAccessApiUsageException e) {
+            System.out.println("Not found User");
+        }
         return null;
     }
 
+    @Override
     public User updateUser(User user) {
-        return null;
+        return userDAO.updateUser(user);
     }
 
+    @Override
     public User readUser(Integer userId) {
-        return null;
+        return userDAO.readUser(userId);
     }
 }
